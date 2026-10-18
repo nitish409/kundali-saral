@@ -49,7 +49,7 @@ python -m pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-Open **http://127.0.0.1:8000** and click **Try a sample chart**.
+
 
 ### Run Tests
 
@@ -65,7 +65,7 @@ docker build -t kundali-saral .
 docker run -p 8000:8000 kundali-saral
 ```
 
-Open **http://localhost:8000**.
+Open **https://kundali-saral.vercel.app/**.
 
 ## Calculation Methodology
 
