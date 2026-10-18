@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1c2039" />
+  <meta name="description" content="Understand your Vedic Kundali in English, Hinglish or Hindi, with simple explanations for every important life area." />
+  <title>Kundali Saral — Your stars, simply explained</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Kundali Saral homepage">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span>KUNDALI <b>SARAL</b><small>कुंडली सरल</small></span>
+      </a>
+      <nav class="header-links" aria-label="Main navigation">
+        <a href="#create" data-i18n="createNav">Create Chart</a>
+        <a href="#glossary-section" data-i18n="glossaryNav">Key Terms</a>
+        <a href="#how" data-i18n="howItWorks">How it works</a>
+        <a href="#about" data-i18n="about">Privacy &amp; Method</a>
+      </nav>
+      <div class="lang-controls-wrap">
+        <div class="lang-control" role="group" aria-label="Select language">
+          <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+          <button type="button" data-lang="hinglish" aria-pressed="false">Hinglish</button>
+          <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
+        </div>
+        <label id="hinglish-script-wrap" class="script-toggle" hidden>
+          <input type="checkbox" id="hinglish-devanagari" />
+          <span data-i18n="showDevanagariHint">Show हिंदी script in brackets</span>
+        </label>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="tiny-star" aria-hidden="true">✧</span> <span data-i18n="eyebrow">VEDIC WISDOM, MADE UNDERSTANDABLE</span></span>
+          <h1 id="hero-title" data-i18n-html="heroTitle">Your Kundali.<br><em>Finally, in your language.</em></h1>
+          <p class="hero-description" data-i18n="heroDescription">No confusing charts or difficult astrology words. Discover what your birth chart says about career, love, marriage, money and more — explained simply with real astronomical calculations.</p>
+          <div class="hero-proof">
+            <span class="proof-dot" aria-hidden="true">✓</span><span data-i18n="feature1">English · Hinglish · हिंदी</span>
+            <span class="sep" aria-hidden="true">·</span><span data-i18n="feature2">North &amp; South Indian D1 charts</span>
+            <span class="sep" aria-hidden="true">·</span><span data-i18n="feature3">No database storage</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="orbit orbit-3"></div>
+          <div class="orbit-center">☼</div>
+          <span class="orbit-symbol s1">♄</span>
+          <span class="orbit-symbol s2">☽</span>
+          <span class="orbit-symbol s3">♃</span>
+          <span class="orbit-symbol s4">♀</span>
+          <span class="orbit-symbol s5">♂</span>
+          <div class="art-caption">✦ &nbsp; EVERY CHART TELLS A STORY</div>
+        </div>
+      </section>
+
+      <section class="builder-card" id="create" aria-labelledby="form-title">
+        <div class="builder-top">
+          <div>
+            <span class="step-label" data-i18n="stepLabel">STEP 01 · YOUR BIRTH DETAILS</span>
+            <h2 id="form-title" data-i18n="formTitle">Let’s discover your chart</h2>
+            <p data-i18n="formDescription">Enter the date, local time, and city where you were born (not your current location).</p>
+          </div>
+          <span class="privacy-pill">♧ <span data-i18n="private">No account or tracking</span></span>
+        </div>
+
+        <form id="birth-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="name" data-i18n="name">Your name (optional)</label>
+              <input id="name" type="text" autocomplete="name" maxlength="80" data-i18n-placeholder="namePlaceholder" placeholder="What should we call you?" />
+            </div>
+            <div class="field">
+              <label for="birth-date" data-i18n="birthDate">Date of birth</label>
+              <input id="birth-date" type="date" required min="1900-01-01" max="2100-12-31" />
+            </div>
+            <div class="field">
+              <label for="birth-time" data-i18n="birthTime">Local time of birth</label>
+              <input id="birth-time" type="time" required />
+              <small data-i18n="timeHint">Ascendant (Lagna) shifts roughly every 2 hours.</small>
+              <label class="checkbox-row" for="time-uncertain">
+                <input id="time-uncertain" type="checkbox" />
+                <span data-i18n="timeUncertainLabel">Exact birth time is uncertain / approximate</span>
+              </label>
+            </div>
+            <div class="field city-field">
+              <label for="city" data-i18n="birthplace">Birth city / place (at birth)</label>
+              <div class="city-entry">
+                <input id="city" type="text" autocomplete="off" placeholder="Search your birth city" data-i18n-placeholder="cityPlaceholder" aria-autocomplete="list" aria-controls="city-options" aria-expanded="false" />
+                <button id="online-search-btn" type="button" class="lookup-btn" data-i18n="searchPlace">Find place</button>
+              </div>
+              <ul id="city-options" class="city-options" role="listbox" hidden></ul>
+              <small data-i18n="cityHint">Select a city suggestion to set birthplace coordinates and historical timezone.</small>
+            </div>
+          </div>
+
+          <details class="advanced" id="advanced">
+            <summary>
+              <span data-i18n="advanced">Advanced: coordinates, timezone &amp; DST overlap</span>
+              <span class="adv-caption" data-i18n="advancedHint">Verify birthplace coordinates or resolve daylight-saving clock overlaps</span>
+            </summary>
+            <div class="advanced-grid">
+              <div class="field">
+                <label for="lat" data-i18n="latitude">Latitude (-90 to 90)</label>
+                <input id="lat" type="number" step="any" min="-90" max="90" required />
+              </div>
+              <div class="field">
+                <label for="lon" data-i18n="longitude">Longitude (-180 to 180)</label>
+                <input id="lon" type="number" step="any" min="-180" max="180" required />
+              </div>
+              <div class="field">
+                <label for="tz" data-i18n="timezone">IANA timezone</label>
+                <input id="tz" type="text" spellcheck="false" placeholder="Asia/Kolkata" required />
+              </div>
+              <div class="field" id="dst-fold-wrap">
+                <label for="dst-fold" data-i18n="dstFoldLabel">Daylight-saving repeated hour</label>
+                <select id="dst-fold">
+                  <option value="" data-i18n="dstAuto">Ask me if time is ambiguous</option>
+                  <option value="0" data-i18n="dstFold0">Earlier occurrence (Daylight Saving / Summer time)</option>
+                  <option value="1" data-i18n="dstFold1">Later occurrence (Standard / Winter time)</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+          <div id="form-error" class="form-error" role="alert" hidden></div>
+
+          <div class="form-actions">
+            <button type="submit" id="generate-btn" class="primary-btn">
+              <span data-i18n="generate">✧ Generate my Kundali</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <button type="button" id="demo-btn" class="secondary-btn" data-i18n="demo">Try a sample chart</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="results" id="results" hidden aria-live="polite">
+        <div class="print-cover-header">
+          <div class="print-brand">✦ KUNDALI SARAL · जन्म कुंडली रिपोर्ट</div>
+          <div id="print-meta-line" class="print-meta-line"></div>
+        </div>
+
+        <div class="results-heading">
+          <div>
+            <span class="step-label" data-i18n="stepResults">STEP 02 · YOUR PERSONAL KUNDALI REPORT</span>
+            <h2 id="results-title">Your personal Kundali</h2>
+            <p id="results-subtitle"></p>
+          </div>
+          <div class="result-actions">
+            <label class="anon-toggle" for="anon-export">
+              <input type="checkbox" id="anon-export" />
+              <span data-i18n="excludeNameExport">Hide name on export/print</span>
+            </label>
+            <button type="button" class="outline-btn" id="print-btn">↧ <span data-i18n="print">Print / Save PDF Report</span></button>
+            <button type="button" class="outline-btn" id="json-btn">⇩ <span data-i18n="export">Export JSON</span></button>
+          </div>
+        </div>
+
+        <div id="uncertainty-alert" class="uncertainty-banner" role="status" hidden></div>
+
+        <div class="summary-tiles summary-tiles-5">
+          <article class="summary-tile">
+            <span data-i18n="lagna">Ascendant / Lagna</span>
+            <strong id="lagna-result">—</strong>
+            <small id="lagna-note" data-i18n="lagnaNote">First house (H1) &amp; self approach</small>
+          </article>
+          <article class="summary-tile highlight-tile">
+            <span data-i18n="moonSign">Moon sign / Rashi</span>
+            <strong id="moon-result">—</strong>
+            <small data-i18n="moonNote">Mind, emotions &amp; inner comfort</small>
+          </article>
+          <article class="summary-tile">
+            <span data-i18n="sunSign">Sun sign (Sidereal)</span>
+            <strong id="sun-result">—</strong>
+            <small data-i18n="sunNote">Vitality &amp; core direction</small>
+          </article>
+          <article class="summary-tile">
+            <span data-i18n="nakshatra">Birth Nakshatra</span>
+            <strong id="nakshatra-result">—</strong>
+            <small id="pada-result">—</small>
+          </article>
+          <article class="summary-tile">
+            <span data-i18n="currentDashaTile">Current Mahadasha</span>
+            <strong id="dasha-tile-result">—</strong>
+            <small id="dasha-tile-dates">—</small>
+          </article>
+        </div>
+
+        <div class="result-intro">
+          <div class="intro-icon" aria-hidden="true">✦</div>
+          <div>
+            <div class="split-badges">
+              <span class="badge-calc" data-i18n="badgeCalculated">Astronomical Calculation: Lahiri Sidereal</span>
+              <span class="badge-trad" data-i18n="badgeTraditional">Traditional Jyotish Interpretation</span>
+            </div>
+            <p id="read-summary"></p>
+            <p id="read-intro"></p>
+          </div>
+        </div>
+
+        <div class="report-layout">
+          <aside class="report-nav" aria-label="Report sections">
+            <h3 data-i18n="explore">Explore your Kundali</h3>
+            <div id="nav-buttons"></div>
+          </aside>
+
+          <div class="report-main">
+            <section class="report-panel" id="chart-panel">
+              <div class="panel-header-flex">
+                <div>
+                  <div class="panel-kicker">01 / <span data-i18n="yourChart">YOUR BIRTH CHART (D1 RASHI)</span></div>
+                  <h3 data-i18n="chartHeading">Your birth chart, decoded</h3>
+                </div>
+                <div class="chart-style-switch" role="group" aria-label="Select chart layout style">
+                  <button type="button" data-chart-style="south" class="active" aria-pressed="true" data-i18n="southStyleBtn">South Indian</button>
+                  <button type="button" data-chart-style="north" aria-pressed="false" data-i18n="northStyleBtn">North Indian (Diamond)</button>
+                  <button type="button" data-chart-style="both" aria-pressed="false" data-i18n="bothStyleBtn">Show Both</button>
+                </div>
+              </div>
+              <p class="panel-description" id="chart-style-description" data-i18n="chartDescription">Click or press Enter on any house or planet to inspect its meaning, ruler, and placements. Switching chart style never alters astronomical positions.</p>
+
+              <div class="chart-wrap" id="chart-display-wrap">
+                <div class="charts-dual-stage" id="charts-stage" data-mode="south">
+                  <div class="chart-box" id="south-chart-box">
+                    <div class="chart-box-caption" data-i18n="southChartTitle">South Indian D1 (Fixed Zodiac Signs)</div>
+                    <div id="vedic-chart" class="vedic-chart" role="group" aria-label="12 sign South Indian Vedic birth chart"></div>
+                  </div>
+                  <div class="chart-box" id="north-chart-box" hidden>
+                    <div class="chart-box-caption" data-i18n="northChartTitle">North Indian D1 (Fixed Houses, Lagna at Top)</div>
+                    <div id="north-chart" class="north-chart" role="group" aria-label="12 house North Indian diamond Vedic birth chart"></div>
+                  </div>
+                </div>
+
+                <div class="chart-guide-and-inspector">
+                  <div id="chart-inspector" class="chart-inspector" aria-live="polite">
+                    <div class="inspector-kicker" id="inspector-kicker" data-i18n="inspectorTitle">INTERACTIVE INSPECTOR</div>
+                    <h4 id="inspector-heading">—</h4>
+                    <p id="inspector-body" class="inspector-body"></p>
+                    <div id="inspector-meta" class="inspector-meta"></div>
+                  </div>
+                  <div class="chart-guide">
+                    <h4 data-i18n="guideTitle">How to read North &amp; South charts</h4>
+                    <p data-i18n="guide1">South Indian chart keeps zodiac signs fixed clockwise; H1 marks your Lagna.</p>
+                    <p data-i18n="guide2">North Indian diamond chart keeps House 1 fixed at the top center diamond and counts counter-clockwise; numbers 1–12 show the Rashi (1=Aries … 12=Pisces).</p>
+                    <p data-i18n="guide3">Click any house or planet row to see why it matters and where its ruler sits.</p>
+                    <p data-i18n="guide4">An empty house is completely normal and never means a bad outcome.</p>
+                  </div>
+                </div>
+              </div>
+
+              <h4 class="table-label" data-i18n="planetPositions">9 Grahas — Astronomical &amp; Nakshatra Positions</h4>
+              <p class="table-subhint" data-i18n="planetTableHint">Click any row to inspect that Graha. Rahu and Ketu are mathematical lunar nodes, not physical planets.</p>
+              <div class="table-scroll">
+                <table class="planet-table">
+                  <thead>
+                    <tr>
+                      <th data-i18n="planet">Graha</th>
+                      <th data-i18n="sign">Rashi (Sign)</th>
+                      <th data-i18n="house">House</th>
+                      <th data-i18n="degree">Degree</th>
+                      <th data-i18n="nakshatraCol">Nakshatra (Pada)</th>
+                      <th data-i18n="dignityCol">Traditional Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="planet-rows"></tbody>
+                </table>
+              </div>
+
+              <h4 class="table-label" data-i18n="houseTableHeading">12 Bhavas (Houses) — Signs, Rulers &amp; Occupants</h4>
+              <div class="table-scroll">
+                <table class="planet-table house-table">
+                  <thead>
+                    <tr>
+                      <th data-i18n="house">House</th>
+                      <th data-i18n="houseThemeCol">Life Area</th>
+                      <th data-i18n="sign">Rashi</th>
+                      <th data-i18n="houseLordCol">House Lord (Placement)</th>
+                      <th data-i18n="occupantsCol">Occupants &amp; Aspects</th>
+                    </tr>
+                  </thead>
+                  <tbody id="house-rows"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="report-panel" id="topics-overview-panel">
+              <div class="panel-kicker">02 / <span data-i18n="lifeAreasKicker">17 LIFE AREAS EXPLAINED</span></div>
+              <h3 data-i18n="lifeAreasHeading">Life areas: calculated placements &amp; traditional meaning</h3>
+              <p class="panel-description" data-i18n="lifeAreasDesc">Filter by category or read all 17 independent sections. Every section separates astronomical chart facts from traditional Parashari symbolism.</p>
+              <div id="category-tabs" class="category-tabs" role="tablist" aria-label="Filter life report sections by category"></div>
+            </section>
+
+            <div id="topic-panels"></div>
+
+            <section class="report-panel" id="dasha-panel">
+              <div class="panel-kicker" data-i18n="timing">TRADITIONAL TIME CYCLES</div>
+              <h3 data-i18n="dasha">Vimshottari Mahadasha</h3>
+              <p class="panel-description" data-i18n="dashaDescription">Traditional planetary periods derived from the Moon's birth Nakshatra longitude. Uses an approximate 365.2425-day solar year convention; different lineages vary slightly.</p>
+              <div id="dasha-list" class="dasha-list"></div>
+            </section>
+
+            <section class="report-panel methodology" id="method-panel">
+              <div class="panel-kicker" data-i18n="trustKicker">TRANSPARENCY, METHODOLOGY &amp; PRIVACY</div>
+              <h3 data-i18n="method">How we calculated this &amp; important limits</h3>
+              <div id="method-text"></div>
+              <p class="safety-box" data-i18n="safety">Astrology is a cultural and spiritual interpretive tradition, not a scientifically validated way to predict outcomes. Never use this report in place of evidence-based medical, mental health, legal, financial or relationship decisions.</p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="glossary-section" id="glossary-section" aria-labelledby="glossary-heading">
+        <span class="step-label" data-i18n="glossaryKicker">NEW TO KUNDALI?</span>
+        <h2 id="glossary-heading" data-i18n="glossaryHeading">Key Jyotish words, explained in one line</h2>
+        <p class="glossary-sub" data-i18n="glossarySub">You never need to memorize Sanskrit terms to read your chart, but here is what the common words mean.</p>
+        <div id="glossary-grid" class="glossary-grid"></div>
+      </section>
+
+      <section class="how-section" id="how">
+        <span class="step-label" data-i18n="simple">SIMPLE BY DESIGN</span>
+        <h2 data-i18n="howHeading">Ancient concepts. Modern clarity.</h2>
+        <div class="how-grid">
+          <article>
+            <span>01</span>
+            <h3 data-i18n="how1Title">Enter birth details</h3>
+            <p data-i18n="how1Body">Your birth date, local time, and birthplace coordinates convert accurately to UTC using historical IANA timezone rules.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3 data-i18n="how2Title">Real astronomical math</h3>
+            <p data-i18n="how2Body">Swiss Ephemeris Moshier computes sidereal (Lahiri) longitudes, whole-sign houses, and Nakshatra padas offline — never guessed by AI.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3 data-i18n="how3Title">Facts vs. tradition</h3>
+            <p data-i18n="how3Body">Explore 17 life areas with clear rule IDs, balanced strengths and growth edges, and practical self-reflection prompts.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="about">
+      <div>
+        <div class="footer-brand">✦ KUNDALI SARAL</div>
+        <p data-i18n="footerDesc">Making traditional Jyotish easier to understand, transparent about its math, and free of fear-based claims.</p>
+        <small id="osm-credit">Place search data, when enabled: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> · Ephemeris: PySwissEph / Swiss Ephemeris (see LICENSE_NOTICE.md)</small>
+      </div>
+      <div class="footer-right">
+        <p data-i18n="footerPrivacy">Privacy first: birth details are processed in memory only to compute your chart. No user account, tracking pixel, or database storage is used.</p>
+        <small>© 2026 Kundali Saral · Transparent Educational Edition</small>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

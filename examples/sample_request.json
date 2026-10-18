@@ -1,0 +1,10 @@
+{
+  "name": "Sample chart (fictional)",
+  "birth_date": "1998-08-15",
+  "birth_time": "08:30",
+  "city": "New Delhi, India",
+  "latitude": 28.6139,
+  "longitude": 77.2090,
+  "time_zone": "Asia/Kolkata",
+  "language": "en"
+}
